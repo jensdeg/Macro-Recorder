@@ -23,19 +23,16 @@ bool MouseClickedEvent(){
 }
 
 
-int main(){
-
+int main(){   
+    GetAsyncKeyState(0x01); // flush mouse state
     
-    //mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-
     while (true)
     {
         //exits if deletes is pressed
         if(GetAsyncKeyState(0x2E)){
-            for(int i = 0; i<clicks.size(); i++){
+            for(int i = 0; i<clicks.size(); i++){ 
                 SetCursorPos(clicks[i].x, clicks[i].y);
-
-                std::cout << clicks[i].x << " : " << clicks[i].y << std::endl;
+                mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
             return EXIT_SUCCESS;
         }
@@ -45,8 +42,7 @@ int main(){
             clicks.push_back(mousepos);
         }
     }
-    return EXIT_SUCCESS;
-}
+    return EXIT_SUCCESS;}
 
 
 
